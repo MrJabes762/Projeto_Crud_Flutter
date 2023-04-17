@@ -43,4 +43,9 @@ class Users with ChangeNotifier {
 
     notifyListeners();
   }
+
+  User byIndex(int i) {
+    return _items.values.elementAt(i);
+  }
+
 }
