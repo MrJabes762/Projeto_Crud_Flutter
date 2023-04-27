@@ -47,5 +47,10 @@ class Users with ChangeNotifier {
   User byIndex(int i) {
     return _items.values.elementAt(i);
   }
-
+  void remove(User user){
+    if ((user != null) && user.id != null){
+      _items.remove(user.id);
+      notifyListeners();
+    }
+  }
 }
