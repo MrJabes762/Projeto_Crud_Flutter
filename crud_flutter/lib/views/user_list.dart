@@ -1,4 +1,3 @@
-
 import 'package:crud_flutter/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +18,11 @@ class UserList extends StatelessWidget {
               
             },
             icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                AppRoutes.USER_FORM
+              );
+            },
           ),
         ],
       ),
