@@ -22,6 +22,7 @@ class Userform extends StatelessWidget {
                 _form.currentState!.save();
                 Navigator.of(context).pop();
               }
+              Navigator.of(context).pop();
             },
           ),
         ],
@@ -53,6 +54,16 @@ class Userform extends StatelessWidget {
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'URL do Avatar'),
+          child: Column (
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration (labelText: 'Nome'),
+              ),
+              TextFormField(
+                decoration: InputDecoration (labelText: 'Email'),
+              ),
+              TextFormField(
+                decoration: InputDecoration (labelText: 'URL do Avatar'),
               ),
             ],
           ),
