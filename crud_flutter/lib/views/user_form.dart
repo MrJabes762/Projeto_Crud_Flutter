@@ -4,6 +4,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
 
 class Userform extends StatelessWidget {
+  final _form = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +15,12 @@ class Userform extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.save),
             onPressed: () {
-              Navigator.of(context).pop();
+              final isValid = _form.currentState!.validate();
+
+              if (isValid) {
+                _form.currentState!.save();
+                Navigator.of(context).pop();
+              }
             },
           ),
         ],
@@ -21,16 +28,30 @@ class Userform extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(15),
         child: Form(
-          child: Column (
+          key: _form,
+          child: Column(
             children: <Widget>[
               TextFormField(
-                decoration: InputDecoration (labelText: 'Nome'),
+                decoration: InputDecoration(labelText: 'Nome'),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Nome inválido';
+                  }
+                  if (value.trim().length < 3){
+                    return 'Nome muito pequeno. No minimo 3 letras';
+                  }
+                  
+                  return null;
+                },
+                onSaved: (value) {
+                  print(value);
+                },
               ),
               TextFormField(
-                decoration: InputDecoration (labelText: 'Email'),
+                decoration: InputDecoration(labelText: 'Email'),
               ),
               TextFormField(
-                decoration: InputDecoration (labelText: 'URL do Avatar'),
+                decoration: InputDecoration(labelText: 'URL do Avatar'),
               ),
             ],
           ),
