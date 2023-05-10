@@ -15,7 +15,6 @@ class Userform extends StatelessWidget {
     }
   }
   final Map<String,String> _formData = {};
-
   @override
   Widget build(BuildContext context) {
     final User user =  ModalRoute.of(context).settings.arguments;
