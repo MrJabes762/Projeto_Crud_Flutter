@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 class Userform extends StatelessWidget {
   final _form = GlobalKey<FormState>();
-  final Map<String,String> _formData = {};
 
   void _loadFormData (User user){
     if (user != null){
@@ -15,6 +14,8 @@ class Userform extends StatelessWidget {
       _formData['avatarUrl'] = user.avatarUrl;
     }
   }
+  final Map<String,String> _formData = {};
+
   @override
   Widget build(BuildContext context) {
     final User user =  ModalRoute.of(context).settings.arguments;
@@ -40,8 +41,7 @@ class Userform extends StatelessWidget {
                   avatarUrl: _formData ['avatarUrl'],
                 ),
                 );
-                Navigator.of(context).pop();
-              }
+              Navigator.of(context).pop();
             },
           ),
         ],
@@ -54,6 +54,29 @@ class Userform extends StatelessWidget {
             children: <Widget>[
               TextFormField(
                 initialValue: _formData ['name'],
+                decoration: InputDecoration(labelText: 'Nome'),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Nome inválido';
+                  }
+                  if (value.trim().length < 3){
+                    return 'Nome muito pequeno. No minimo 3 letras';
+                  }
+                  
+                  return null;
+                },
+                onSaved: (value) {
+                  print(value);
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Email'),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'URL do Avatar'),
+          child: Column (
+            children: <Widget>[
+              TextFormField(
                 decoration: InputDecoration(labelText: 'Nome'),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
