@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 class Userform extends StatelessWidget {
   final _form = GlobalKey<FormState>();
-  final Map<String,String> _formData = {};
 
+  final Map<String,String> _formData = {};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +29,7 @@ class Userform extends StatelessWidget {
                   avatarUrl: _formData ['avatarUrl'],
                 ),
                 );
-                Navigator.of(context).pop();
-              }
+              Navigator.of(context).pop();
             },
           ),
         ],
@@ -40,6 +39,29 @@ class Userform extends StatelessWidget {
         child: Form(
           key: _form,
           child: Column(
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Nome'),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Nome inválido';
+                  }
+                  if (value.trim().length < 3){
+                    return 'Nome muito pequeno. No minimo 3 letras';
+                  }
+                  
+                  return null;
+                },
+                onSaved: (value) {
+                  print(value);
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Email'),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'URL do Avatar'),
+          child: Column (
             children: <Widget>[
               TextFormField(
                 decoration: InputDecoration(labelText: 'Nome'),
